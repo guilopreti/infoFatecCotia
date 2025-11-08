@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
-import { Link } from 'expo-router';
-import { Colors } from '@/constants/Colors';
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import { Link } from "expo-router";
+import { Colors } from "@/constants/Colors";
+import { useRouter } from "expo-router";
 
 type CategoryCardProps = {
   title: string;
@@ -10,16 +11,19 @@ type CategoryCardProps = {
   color?: string;
 };
 
-function CategoryCard({ title, description, href, icon, color }: CategoryCardProps) {
+function CategoryCard({
+  title,
+  description,
+  href,
+  icon,
+  color,
+}: CategoryCardProps) {
   const cardColor = color || Colors.fatec.red;
-  
+
   return (
     <Link href={href as any} asChild>
-      <Pressable 
-        style={({ pressed }) => [
-          styles.card,
-          pressed && styles.cardPressed
-        ]}
+      <Pressable
+        style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
       >
         <View style={styles.cardTop}>
           <View style={[styles.iconCircle, { backgroundColor: cardColor }]}>
@@ -39,20 +43,43 @@ function CategoryCard({ title, description, href, icon, color }: CategoryCardPro
 }
 
 export default function Index() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Info Fatec Cotia</Text>
-          <Text style={styles.headerSubtitle}>Guia de informações sobre a faculdade e a cidade</Text>
+          <Text style={styles.headerSubtitle}>
+            Guia de informações sobre a faculdade e a cidade
+          </Text>
         </View>
 
         <View style={styles.content}>
+          <Pressable
+            onPress={() => router.push("/cursos")}
+            style={({ pressed }) => [
+              styles.coursesCard,
+              pressed && { opacity: 0.7 },
+            ]}
+          >
+            <View style={styles.coursesIconContainer}>
+              <Text style={styles.coursesIcon}>🎓</Text>
+            </View>
+            <View style={styles.coursesContent}>
+              <Text style={styles.coursesTitle}>Nossos Cursos</Text>
+              <Text style={styles.coursesDescription}>
+                Conheça os cursos oferecidos
+              </Text>
+            </View>
+            <Text style={styles.coursesArrow}>›</Text>
+          </Pressable>
+
           <Text style={styles.sectionTitle}>Explore</Text>
-          
+
           <View style={styles.cardsContainer}>
             <CategoryCard
               title="Cultura"
@@ -97,7 +124,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: "#FAFAFA",
   },
   scrollView: {
     flex: 1,
@@ -110,21 +137,21 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 38,
-    fontWeight: '800',
+    fontWeight: "800",
     color: Colors.fatec.white,
     marginBottom: 8,
     letterSpacing: -1,
   },
   headerSubtitle: {
     fontSize: 15,
-    color: 'rgba(255, 255, 255, 0.9)',
-    fontWeight: '400',
+    color: "rgba(255, 255, 255, 0.9)",
+    fontWeight: "400",
   },
   locationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.15)',
-    alignSelf: 'flex-start',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.15)",
+    alignSelf: "flex-start",
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
@@ -136,14 +163,60 @@ const styles = StyleSheet.create({
   locationText: {
     fontSize: 13,
     color: Colors.fatec.white,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   content: {
     padding: 20,
   },
+  coursesCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: Colors.fatec.red,
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 5,
+  },
+  coursesIconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  coursesIcon: {
+    fontSize: 28,
+  },
+  coursesContent: {
+    flex: 1,
+  },
+  coursesTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: Colors.fatec.white,
+    marginBottom: 4,
+    letterSpacing: -0.5,
+  },
+  coursesDescription: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.9)",
+    lineHeight: 20,
+  },
+  coursesArrow: {
+    fontSize: 32,
+    color: Colors.fatec.white,
+    fontWeight: "bold",
+    marginLeft: 8,
+  },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: Colors.fatec.black,
     marginBottom: 16,
     letterSpacing: -0.5,
@@ -155,7 +228,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.fatec.white,
     borderRadius: 16,
     padding: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -164,23 +237,23 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 3,
     borderWidth: 1,
-    borderColor: '#F0F0F0',
+    borderColor: "#F0F0F0",
   },
   cardPressed: {
     opacity: 0.7,
     transform: [{ scale: 0.98 }],
   },
   cardTop: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 2
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 2,
   },
   iconCircle: {
     width: 44,
     height: 44,
     borderRadius: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 12,
   },
   iconText: {
@@ -189,13 +262,13 @@ const styles = StyleSheet.create({
   cardTitle: {
     flex: 1,
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: "700",
     color: Colors.fatec.black,
     letterSpacing: -0.3,
   },
   cardDescription: {
     fontSize: 13,
-    color: '#666',
+    color: "#666",
     lineHeight: 18,
     paddingLeft: 56,
   },
@@ -204,22 +277,22 @@ const styles = StyleSheet.create({
   },
   arrowIcon: {
     fontSize: 24,
-    color: '#CCC',
-    fontWeight: 'bold',
+    color: "#CCC",
+    fontWeight: "bold",
   },
   footer: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 32,
   },
   footerText: {
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: "700",
     color: Colors.fatec.black,
     letterSpacing: 1,
   },
   footerYear: {
     fontSize: 11,
-    color: '#999',
+    color: "#999",
     marginTop: 4,
   },
 });

@@ -1,10 +1,10 @@
-import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
-import { Colors } from '@/constants/Colors';
+import { Tabs } from "expo-router";
+import { Text } from "react-native";
+import { Colors } from "@/constants/Colors";
 
 export default function TabsLayout() {
   return (
-    <Tabs 
+    <Tabs
       screenOptions={{
         headerShown: true,
         headerStyle: {
@@ -12,7 +12,7 @@ export default function TabsLayout() {
         },
         headerTintColor: Colors.fatec.white,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: "bold",
         },
         tabBarStyle: {
           backgroundColor: Colors.fatec.white,
@@ -20,46 +20,53 @@ export default function TabsLayout() {
           borderTopWidth: 1,
         },
         tabBarActiveTintColor: Colors.fatec.red,
-        tabBarInactiveTintColor: '#999',
+        tabBarInactiveTintColor: "#999",
       }}
     >
-      <Tabs.Screen 
-        name="index" 
+      <Tabs.Screen
+        name="index"
         options={{
-          title: 'Início',
-          tabBarLabel: 'Início',
+          title: "Início",
+          tabBarLabel: "Início",
           tabBarIcon: ({ color, size }) => (
             <Text style={{ fontSize: size, color }}>🏠</Text>
           ),
-        }} 
+        }}
       />
-      <Tabs.Screen 
-        name="cultura" 
+      <Tabs.Screen
+        name="cursos"
         options={{
-          title: 'Cultura',
+          title: "Cursos",
           href: null,
-        }} 
+        }}
       />
-      <Tabs.Screen 
-        name="educacao" 
+      <Tabs.Screen
+        name="cultura"
         options={{
-          title: 'Educação',
+          title: "Cultura",
           href: null,
-        }} 
+        }}
       />
-      <Tabs.Screen 
-        name="empregos" 
+      <Tabs.Screen
+        name="educacao"
         options={{
-          title: 'Empregos',
+          title: "Educação",
           href: null,
-        }} 
+        }}
       />
-      <Tabs.Screen 
-        name="seguranca" 
+      <Tabs.Screen
+        name="empregos"
         options={{
-          title: 'Segurança',
+          title: "Empregos",
           href: null,
-        }} 
+        }}
+      />
+      <Tabs.Screen
+        name="seguranca"
+        options={{
+          title: "Segurança",
+          href: null,
+        }}
       />
     </Tabs>
   );
