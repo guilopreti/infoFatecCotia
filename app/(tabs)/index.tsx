@@ -112,6 +112,20 @@ export default function Index() {
           </View>
         </View>
 
+        <View style={styles.developerSection}>
+          <Pressable
+            onPress={() => router.push("/desenvolvedor")}
+            style={({ pressed }) => [
+              styles.developerButton,
+              pressed && { opacity: 0.7 },
+            ]}
+          >
+            <Text style={styles.developerIcon}>👨‍💻</Text>
+            <Text style={styles.developerText}>Desenvolvedor</Text>
+            <Text style={styles.developerArrow}>›</Text>
+          </Pressable>
+        </View>
+
         <View style={styles.footer}>
           <Text style={styles.footerText}>FATEC Cotia</Text>
           <Text style={styles.footerYear}>2025</Text>
@@ -278,6 +292,38 @@ const styles = StyleSheet.create({
   arrowIcon: {
     fontSize: 24,
     color: "#CCC",
+    fontWeight: "bold",
+  },
+  developerSection: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  developerButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#1A1A1A",
+    borderRadius: 16,
+    padding: 18,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 5,
+  },
+  developerIcon: {
+    fontSize: 28,
+    marginRight: 12,
+  },
+  developerText: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: "700",
+    color: Colors.fatec.white,
+    letterSpacing: -0.5,
+  },
+  developerArrow: {
+    fontSize: 28,
+    color: Colors.fatec.white,
     fontWeight: "bold",
   },
   footer: {

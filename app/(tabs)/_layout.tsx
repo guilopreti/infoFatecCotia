@@ -68,6 +68,13 @@ export default function TabsLayout() {
           href: null,
         }}
       />
+      <Tabs.Screen
+        name="desenvolvedor"
+        options={{
+          title: "Desenvolvedor",
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
